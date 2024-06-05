@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách môn học</title>
+  <th:block th:replace="layout::link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container mt-4">
+  <h2>Danh sách môn học</h2>
+
+  <form class="form-inline mb-4">
+    <div class="input-group mr-2">
+      <input type="text" class="form-control custom-search" name="tenMonHoc" placeholder="Nhập tên môn học">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+      </div>
+    </div>
+  </form>
+
+  <a class="btn btn-primary" th:href="@{/monhoc/add}">Thêm mới</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Mã môn</th>
+      <th>Tên môn</th>
+      <th>Chức năng</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="monhoc : ${dsMonHoc}">
+      <td th:text="${monhoc.maMon}"></td>
+      <td th:text="${monhoc.tenMonHoc}"></td>
+      <td>
+        <a th:href="@{/monhoc/edit/{id}(id=${monhoc.maMon})}">Sửa</a> |
+        <a th:href="@{/monhoc/delete/{id}(id=${monhoc.maMon})}" onclick="return confirm ('Bạn có muốn xoá?')">Xoá</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<th:block th:replace="layout::footer"></th:block>
+</body>
+</html>
+

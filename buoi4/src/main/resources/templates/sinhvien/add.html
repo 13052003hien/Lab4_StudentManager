@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới sinh viên</title>
+    <th:block th:replace="layout::link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container mt-4">
+    <h2>Thêm mới sinh viên</h2>
+    <form th:action="@{/sinhvien/add}" th:object="${sinhvien}" method="post">
+        <div class="form-group">
+            <label for="mssv">MSSV:</label>
+            <input type="text" id="mssv" th:field="*{mssv}" class="form-control" />
+            <div th:if="${#fields.hasErrors('mssv')}" th:errors="*{mssv}" class="alert alert-danger"></div>
+        </div>
+        <div class="form-group">
+            <label for="hoTen">tên sinh viên:</label>
+            <input type="text" id="hoTen" th:field="*{hoTen}" class="form-control" />
+            <div th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}" class="alert alert-danger"></div>
+        </div>
+        <div class="form-group">
+            <label for="ngaySinh">Ngày sinh:</label>
+            <input type="date" id="ngaySinh" th:field="*{ngaySinh}" class="form-control" />
+            <div th:if="${#fields.hasErrors('ngaySinh')}" th:errors="*{ngaySinh}" class="alert alert-danger"></div>
+        </div>
+        <div class="form-group">
+            <label for="email">email:</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" />
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></div>
+        </div>
+        <div class="form-group">
+            <label for="lop">Lớp:</label>
+            <select id="lop" name="lop" class="form-control">
+                <option th:each="lop : ${dsLop}" th:value="${lop.maLop}" th:text="${lop.tenLop}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="monHocs">Môn học:</label>
+            <select id="monHocs" name="monHocs" class="form-control" multiple>
+                <option th:each="monHoc : ${dsMonHoc}" th:value="${monHoc.maMon}" th:text="${monHoc.tenMonHoc}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a th:href="@{/sinhvien}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+<th:block th:replace="layout::footer"></th:block>
+
+</body>
+</html>

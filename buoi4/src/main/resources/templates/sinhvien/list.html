@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách sinh vien</title>
+  <th:block th:replace="layout::link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container mt-4">
+  <h2>Danh sách sinh vien</h2>
+
+  <form class="form-inline mb-4">
+    <div class="input-group mr-2">
+      <input type="text" class="form-control custom-search" name="hoTen" placeholder="Nhập tên sinh vien">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+      </div>
+    </div>
+  </form>
+
+  <a class="btn btn-primary" th:href="@{/sinhvien/add}">Thêm mới</a>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>MSSV</th>
+      <th>Họ Tên</th>
+      <th>Ngày Sinh</th>
+      <th>Email</th>
+      <th>Lớp</th>
+      <th>Môn Học</th>
+      <th>Chức năng</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sinhvien : ${dsSinhVien}">
+      <td th:text="${sinhvien.mssv}"></td>
+      <td th:text="${sinhvien.hoTen}"></td>
+      <td th:text="${sinhvien.ngaySinh}"></td>
+      <td th:text="${sinhvien.Email}"></td>
+      <td th:text="${sinhvien.lop.tenLop}"></td>
+      <td>
+        <a th:href="@{monhoc/list/{id}(id = ${sinhvien.mssv})}">Môn Học</a>
+      <td>
+      <td>
+        <a th:href="@{/sinhvien/edit/{id}(id=${sinhvien.mssv})}">Sửa</a> |
+        <a th:href="@{/sinhvien/delete/{id}(id=${sinhvien.mssv})}" onclick="return confirm ('Bạn có muốn xoá?')">Xoá</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<th:block th:replace="layout::footer"></th:block>
+</body>
+</html>
+
